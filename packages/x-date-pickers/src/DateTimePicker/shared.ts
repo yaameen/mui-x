@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, JSXElementConstructor} from 'react';
 import { useThemeProps } from '@mui/material/styles';
 import { useDefaultDates, useUtils } from '../internals/hooks/useUtils';
 import { ExportedClockPickerProps } from '../ClockPicker/ClockPicker';
@@ -30,11 +30,11 @@ export interface BaseDateTimePickerProps<TInputDate, TDate>
   /**
    * Date tab icon.
    */
-  dateRangeIcon?: React.ReactNode;
+  dateRangeIcon?: ReactNode;
   /**
    * Time tab icon.
    */
-  timeIcon?: React.ReactNode;
+  timeIcon?: ReactNode;
   /**
    * Minimal selectable moment of time with binding to date, to set min time in each day use `minTime`.
    */
@@ -56,12 +56,12 @@ export interface BaseDateTimePickerProps<TInputDate, TDate>
    * Component that will replace default toolbar renderer.
    * @default DateTimePickerToolbar
    */
-  ToolbarComponent?: React.JSXElementConstructor<BaseToolbarProps<TDate, TDate | null>>;
+  ToolbarComponent?: JSXElementConstructor<BaseToolbarProps<TDate, TDate | null>>;
   /**
    * Mobile picker title, displaying in the toolbar.
    * @default 'Select date & time'
    */
-  toolbarTitle?: React.ReactNode;
+  toolbarTitle?: ReactNode;
   /**
    * Date format, that is displaying in toolbar.
    */
@@ -70,7 +70,7 @@ export interface BaseDateTimePickerProps<TInputDate, TDate>
    * Mobile picker date value placeholder, displaying if `value` === `null`.
    * @default '–'
    */
-  toolbarPlaceholder?: React.ReactNode;
+  toolbarPlaceholder?: ReactNode;
   /**
    * Array of views to show.
    */

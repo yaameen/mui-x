@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { expect } from 'chai';
 import fr from 'date-fns/locale/fr';
 import TextField from '@mui/material/TextField';

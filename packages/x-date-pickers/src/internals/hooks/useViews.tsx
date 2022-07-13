@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useCallback} from 'react';
 import { useControlled } from '@mui/material/utils';
 import { arrayIncludes } from '../utils/utils';
 import { PickerSelectionState } from './usePickerState';
@@ -39,7 +39,7 @@ export function useViews<TDate, View extends CalendarOrClockPickerView>({
   const previousView: View | null = views[views.indexOf(openView) - 1] ?? null;
   const nextView: View | null = views[views.indexOf(openView) + 1] ?? null;
 
-  const changeView = React.useCallback(
+  const changeView = useCallback(
     (newView: View) => {
       setOpenView(newView);
 
@@ -50,13 +50,13 @@ export function useViews<TDate, View extends CalendarOrClockPickerView>({
     [setOpenView, onViewChange],
   );
 
-  const openNext = React.useCallback(() => {
+  const openNext = useCallback(() => {
     if (nextView) {
       changeView(nextView);
     }
   }, [nextView, changeView]);
 
-  const handleChangeAndOpenNext = React.useCallback<PickerOnChangeFn<TDate>>(
+  const handleChangeAndOpenNext = useCallback<PickerOnChangeFn<TDate>>(
     (date, currentViewSelectionState) => {
       const isSelectionFinishedOnCurrentView = currentViewSelectionState === 'finish';
       const globalSelectionState =

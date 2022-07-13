@@ -1,4 +1,3 @@
-import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { spy } from 'sinon';
 import { expect } from 'chai';

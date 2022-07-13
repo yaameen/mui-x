@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { expect } from 'chai';
 import TextField from '@mui/material/TextField';
 import { fireEvent, screen } from '@mui/monorepo/test/utils';

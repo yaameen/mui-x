@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {JSXElementConstructor, ReactNode} from 'react';
 import { useThemeProps } from '@mui/material/styles';
 import { Clock } from '../internals/components/icons';
 import { ExportedClockPickerProps } from '../ClockPicker/ClockPicker';
@@ -35,12 +35,12 @@ export interface BaseTimePickerProps<TInputDate, TDate>
    * Component that will replace default toolbar renderer.
    * @default TimePickerToolbar
    */
-  ToolbarComponent?: React.JSXElementConstructor<BaseToolbarProps<TDate, TDate | null>>;
+  ToolbarComponent?: JSXElementConstructor<BaseToolbarProps<TDate, TDate | null>>;
   /**
    * Mobile picker title, displaying in the toolbar.
    * @default 'Select time'
    */
-  toolbarTitle?: React.ReactNode;
+  toolbarTitle?: ReactNode;
   /**
    * Array of views to show.
    */

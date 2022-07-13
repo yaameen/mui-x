@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {Ref} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Skeleton from '@mui/material/Skeleton';
@@ -22,7 +22,7 @@ export interface CalendarPickerSkeletonProps extends HTMLDivProps {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx?: SxProps<Theme>;
-  ref?: React.Ref<HTMLDivElement>;
+  ref?: Ref<HTMLDivElement>;
 }
 
 const useUtilityClasses = (ownerState: CalendarPickerSkeletonProps) => {
@@ -96,7 +96,7 @@ const monthMap = [
 function CalendarPickerSkeleton(props: CalendarPickerSkeletonProps) {
   const { className, ...other } = useThemeProps<
     Theme,
-    Omit<JSX.IntrinsicElements['div'], 'ref'> & { ref?: React.Ref<HTMLDivElement> },
+    Omit<JSX.IntrinsicElements['div'], 'ref'> & { ref?: Ref<HTMLDivElement> },
     'MuiCalendarPickerSkeleton'
   >({
     props,

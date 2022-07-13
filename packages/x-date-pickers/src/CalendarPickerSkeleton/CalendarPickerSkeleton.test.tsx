@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { describeConformance } from '@mui/monorepo/test/utils';
 import {
   CalendarPickerSkeleton,

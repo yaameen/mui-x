@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, FunctionComponent, forwardRef} from 'react';
 import Button, { ButtonProps } from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { TypographyProps } from '@mui/material/Typography';
@@ -9,7 +9,7 @@ export interface PickersToolbarButtonProps extends ExtendMui<ButtonProps, 'value
   align?: TypographyProps['align'];
   selected: boolean;
   typographyClassName?: string;
-  value: React.ReactNode;
+  value: ReactNode;
   variant: TypographyProps['variant'];
 }
 
@@ -19,8 +19,8 @@ const PickersToolbarButtonRoot = styled(Button)({
   textTransform: 'none',
 });
 
-export const PickersToolbarButton: React.FunctionComponent<PickersToolbarButtonProps> =
-  React.forwardRef(function PickersToolbarButton(props, ref) {
+export const PickersToolbarButton: FunctionComponent<PickersToolbarButtonProps> =
+  forwardRef(function PickersToolbarButton(props, ref) {
     const { align, className, selected, typographyClassName, value, variant, ...other } = props;
 
     return (

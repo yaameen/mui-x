@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useRef} from 'react';
 import { useForkRef } from '@mui/material/utils';
 import { WrapperVariantContext } from './WrapperVariantContext';
 import { executeInTheNextEventLoopTick } from '../../utils/utils';
@@ -21,8 +21,8 @@ export function DesktopTooltipWrapper(props: InternalDesktopWrapperProps) {
     components,
     componentsProps,
   } = props;
-  const inputContainerRef = React.useRef<HTMLDivElement>(null);
-  const popperRef = React.useRef<HTMLDivElement>(null);
+  const inputContainerRef = useRef<HTMLDivElement>(null);
+  const popperRef = useRef<HTMLDivElement>(null);
 
   const handleBlur = () => {
     executeInTheNextEventLoopTick(() => {

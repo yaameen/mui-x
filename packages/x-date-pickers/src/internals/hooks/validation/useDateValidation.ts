@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useCallback} from 'react';
 import { useValidation, ValidationProps, Validator } from './useValidation';
 import { DayValidationProps } from './models';
 import { useLocalizationContext } from '../useUtils';
@@ -71,7 +71,7 @@ export const useIsDayDisabled = <TDate>({
 }: DayValidationProps<TDate>) => {
   const adapter = useLocalizationContext<TDate>();
 
-  return React.useCallback(
+  return useCallback(
     (day: TDate | null) =>
       validateDate({
         adapter,

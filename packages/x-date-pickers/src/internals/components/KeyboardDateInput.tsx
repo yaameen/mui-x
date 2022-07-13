@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {forwardRef, Ref} from 'react';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useLocaleText, useUtils } from '../hooks/useUtils';
@@ -6,9 +6,9 @@ import { Calendar } from './icons';
 import { useMaskedInput } from '../hooks/useMaskedInput';
 import { DateInputProps } from './PureDateInput';
 
-export const KeyboardDateInput = React.forwardRef(function KeyboardDateInput<TInputDate, TDate>(
+export const KeyboardDateInput = forwardRef(function KeyboardDateInput<TInputDate, TDate>(
   props: DateInputProps<TInputDate, TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const {
     components = {},

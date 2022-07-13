@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/utils';
 import { arrayIncludes } from '../utils/utils';
 import { CalendarOrClockPickerView } from '../models';
@@ -26,7 +26,7 @@ export const useIsLandscape = (
   views: readonly CalendarOrClockPickerView[],
   customOrientation: Orientation | undefined,
 ): boolean => {
-  const [orientation, setOrientation] = React.useState(getOrientation);
+  const [orientation, setOrientation] = useState(getOrientation);
 
   useEnhancedEffect(() => {
     const eventHandler = () => {

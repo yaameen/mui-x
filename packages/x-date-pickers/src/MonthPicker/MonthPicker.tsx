@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { SxProps } from '@mui/system';
@@ -56,12 +56,12 @@ const MonthPickerRoot = styled('div', {
 });
 
 type MonthPickerComponent = (<TDate>(
-  props: MonthPickerProps<TDate> & React.RefAttributes<HTMLDivElement>,
+  props: MonthPickerProps<TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
-export const MonthPicker = React.forwardRef(function MonthPicker<TDate>(
+export const MonthPicker = forwardRef(function MonthPicker<TDate>(
   inProps: MonthPickerProps<TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const utils = useUtils<TDate>();
   const now = useNow<TDate>();

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {HTMLProps, useMemo, useState, useRef, useEffect, ChangeEvent} from 'react';
 import { useRifm } from 'rifm';
 import { useUtils } from './useUtils';
 import { DateInputProps, MuiTextFieldProps } from '../components/PureDateInput';
@@ -20,7 +20,7 @@ type MaskedInputProps<TInputDate, TDate> = Omit<
   | 'openPicker'
   | 'OpenPickerButtonProps'
   | 'renderInput'
-> & { inputProps?: Partial<React.HTMLProps<HTMLInputElement>> };
+> & { inputProps?: Partial<HTMLProps<HTMLInputElement>> };
 
 export const useMaskedInput = <TInputDate, TDate>({
   acceptRegex = /[\d]/gi,
@@ -42,7 +42,7 @@ export const useMaskedInput = <TInputDate, TDate>({
 
   const formatHelperText = utils.getFormatHelperText(inputFormat);
 
-  const { shouldUseMaskedInput, maskToUse } = React.useMemo(() => {
+  const { shouldUseMaskedInput, maskToUse } = useMemo(() => {
     // formatting of dates is a quite slow thing, so do not make useless .format calls
     if (disableMaskedInput) {
       return { shouldUseMaskedInput: false, maskToUse: '' };
@@ -60,7 +60,7 @@ export const useMaskedInput = <TInputDate, TDate>({
     };
   }, [acceptRegex, disableMaskedInput, inputFormat, mask, utils]);
 
-  const formatter = React.useMemo(
+  const formatter = useMemo(
     () =>
       shouldUseMaskedInput && maskToUse
         ? maskedDateFormatter(maskToUse, acceptRegex)
@@ -72,16 +72,16 @@ export const useMaskedInput = <TInputDate, TDate>({
   const parsedValue = rawValue === null ? null : utils.date(rawValue);
 
   // Track the value of the input
-  const [innerInputValue, setInnerInputValue] = React.useState<TDate | null>(parsedValue);
+  const [innerInputValue, setInnerInputValue] = useState<TDate | null>(parsedValue);
   // control the input text
-  const [innerDisplayedInputValue, setInnerDisplayedInputValue] = React.useState<string>(
+  const [innerDisplayedInputValue, setInnerDisplayedInputValue] = useState<string>(
     getDisplayDate(utils, rawValue, inputFormat),
   );
 
   // Inspired from autocomplete: https://github.com/mui/material-ui/blob/2c89d036dc2e16f100528f161600dffc83241768/packages/mui-base/src/AutocompleteUnstyled/useAutocomplete.js#L185:L201
-  const prevRawValue = React.useRef<TInputDate>();
+  const prevRawValue = useRef<TInputDate>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const rawValueChange = rawValue !== prevRawValue.current;
     prevRawValue.current = rawValue;
 
@@ -126,7 +126,7 @@ export const useMaskedInput = <TInputDate, TDate>({
     ? rifmProps
     : {
         value: innerDisplayedInputValue,
-        onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange: (event: ChangeEvent<HTMLInputElement>) => {
           handleChange(event.currentTarget.value);
         },
       };

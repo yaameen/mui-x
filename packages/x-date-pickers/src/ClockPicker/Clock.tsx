@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, useContext, useRef, TouchEvent, MouseEvent, useMemo, KeyboardEvent, Fragment} from 'react';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
@@ -15,7 +15,7 @@ export interface ClockProps<TDate> extends ReturnType<typeof useMeridiemMode> {
   ampm: boolean;
   ampmInClock: boolean;
   autoFocus?: boolean;
-  children: readonly React.ReactNode[];
+  children: readonly ReactNode[];
   date: TDate | null;
   getClockLabelText: (
     view: ClockPickerView,
@@ -150,8 +150,8 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
   const ownerState = props;
 
   const utils = useUtils<TDate>();
-  const wrapperVariant = React.useContext(WrapperVariantContext);
-  const isMoving = React.useRef(false);
+  const wrapperVariant = useContext(WrapperVariantContext);
+  const isMoving = useRef(false);
 
   const isSelectedTimeDisabled = isTimeDisabled(value, type);
   const isPointerInner = !ampm && type === 'hours' && (value < 1 || value > 12);
@@ -167,14 +167,14 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
     onChange(newValue, isFinish);
   };
 
-  const setTime = (event: MouseEvent | React.TouchEvent, isFinish: PickerSelectionState) => {
+  const setTime = (event: MouseEvent | TouchEvent, isFinish: PickerSelectionState) => {
     let { offsetX, offsetY } = event as MouseEvent;
 
     if (offsetX === undefined) {
-      const rect = ((event as React.TouchEvent).target as HTMLElement).getBoundingClientRect();
+      const rect = ((event as TouchEvent).target as HTMLElement).getBoundingClientRect();
 
-      offsetX = (event as React.TouchEvent).changedTouches[0].clientX - rect.left;
-      offsetY = (event as React.TouchEvent).changedTouches[0].clientY - rect.top;
+      offsetX = (event as TouchEvent).changedTouches[0].clientX - rect.left;
+      offsetY = (event as TouchEvent).changedTouches[0].clientY - rect.top;
     }
 
     const newSelectedValue =
@@ -185,26 +185,26 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
     handleValueChange(newSelectedValue, isFinish);
   };
 
-  const handleTouchMove = (event: React.TouchEvent) => {
+  const handleTouchMove = (event: TouchEvent) => {
     isMoving.current = true;
     setTime(event, 'shallow');
   };
 
-  const handleTouchEnd = (event: React.TouchEvent) => {
+  const handleTouchEnd = (event: TouchEvent) => {
     if (isMoving.current) {
       setTime(event, 'finish');
       isMoving.current = false;
     }
   };
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
     // event.buttons & PRIMARY_MOUSE_BUTTON
     if (event.buttons > 0) {
       setTime(event.nativeEvent, 'shallow');
     }
   };
 
-  const handleMouseUp = (event: React.MouseEvent) => {
+  const handleMouseUp = (event: MouseEvent) => {
     if (isMoving.current) {
       isMoving.current = false;
     }
@@ -212,7 +212,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
     setTime(event.nativeEvent, 'finish');
   };
 
-  const hasSelected = React.useMemo(() => {
+  const hasSelected = useMemo(() => {
     if (type === 'hours') {
       return true;
     }
@@ -222,7 +222,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
 
   const keyboardControlStep = type === 'minutes' ? minutesStep : 1;
 
-  const listboxRef = React.useRef<HTMLDivElement>(null);
+  const listboxRef = useRef<HTMLDivElement>(null);
   // Since this is rendered when a Popper is opened we can't use passive effects.
   // Focusing in passive effects in Popper causes scroll jump.
   useEnhancedEffect(() => {
@@ -232,7 +232,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
     }
   }, [autoFocus]);
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     // TODO: Why this early exit?
     if (isMoving.current) {
       return;
@@ -273,7 +273,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
           ownerState={{ disabled }}
         />
         {!isSelectedTimeDisabled && (
-          <React.Fragment>
+          <Fragment>
             <ClockPin />
             {date && (
               <ClockPointer
@@ -283,7 +283,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
                 hasSelected={hasSelected}
               />
             )}
-          </React.Fragment>
+          </Fragment>
         )}
         <div
           aria-activedescendant={selectedId}
@@ -297,7 +297,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
         </div>
       </ClockClock>
       {ampm && (wrapperVariant === 'desktop' || ampmInClock) && (
-        <React.Fragment>
+        <Fragment>
           <ClockAmButton
             data-mui-test="in-clock-am-btn"
             onClick={readOnly ? undefined : () => handleMeridiemChange('am')}
@@ -314,7 +314,7 @@ export function Clock<TDate>(props: ClockProps<TDate>) {
           >
             <Typography variant="caption">PM</Typography>
           </ClockPmButton>
-        </React.Fragment>
+        </Fragment>
       )}
     </ClockRoot>
   );

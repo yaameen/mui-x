@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   BaseDatePickerProps,
@@ -46,7 +46,7 @@ export type StaticDatePickerProps<TInputDate, TDate> = StaticPickerProps<
 };
 
 type StaticDatePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: StaticDatePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: StaticDatePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -59,10 +59,10 @@ type StaticDatePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [StaticDatePicker API](https://mui.com/x/api/date-pickers/static-date-picker/)
  */
-export const StaticDatePicker = React.forwardRef(function StaticDatePicker<
+export const StaticDatePicker = forwardRef(function StaticDatePicker<
   TInputDate,
   TDate = TInputDate,
->(inProps: StaticDatePickerProps<TInputDate, TDate>, ref: React.Ref<HTMLDivElement>) {
+>(inProps: StaticDatePickerProps<TInputDate, TDate>, ref: Ref<HTMLDivElement>) {
   const props = useDatePickerDefaultizedProps<
     TInputDate,
     TDate,
@@ -317,12 +317,12 @@ StaticDatePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => <span data-mui-test="loading-progress">...</span>
    */
   renderLoading: PropTypes.func,

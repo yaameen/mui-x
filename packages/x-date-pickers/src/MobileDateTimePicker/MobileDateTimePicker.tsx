@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   BaseDateTimePickerProps,
@@ -46,7 +46,7 @@ export interface MobileDateTimePickerProps<TInputDate, TDate>
 }
 
 type MobileDateTimePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: MobileDateTimePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: MobileDateTimePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -59,10 +59,10 @@ type MobileDateTimePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [MobileDateTimePicker API](https://mui.com/x/api/date-pickers/mobile-date-time-picker/)
  */
-export const MobileDateTimePicker = React.forwardRef(function MobileDateTimePicker<
+export const MobileDateTimePicker = forwardRef(function MobileDateTimePicker<
   TInputDate,
   TDate = TInputDate,
->(inProps: MobileDateTimePickerProps<TInputDate, TDate>, ref: React.Ref<HTMLDivElement>) {
+>(inProps: MobileDateTimePickerProps<TInputDate, TDate>, ref: Ref<HTMLDivElement>) {
   const props = useDateTimePickerDefaultizedProps<
     TInputDate,
     TDate,
@@ -406,12 +406,12 @@ MobileDateTimePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => <span data-mui-test="loading-progress">...</span>
    */
   renderLoading: PropTypes.func,

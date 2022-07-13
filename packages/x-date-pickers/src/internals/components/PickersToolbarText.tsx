@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, ElementType, forwardRef} from 'react';
 import clsx from 'clsx';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
@@ -6,13 +6,13 @@ import { generateUtilityClasses } from '@mui/material';
 
 export interface PickersToolbarTextProps extends Omit<TypographyProps, 'classes'> {
   selected?: boolean;
-  value: React.ReactNode;
+  value: ReactNode;
 }
 
 const classes = generateUtilityClasses('PrivatePickersToolbarText', ['selected']);
 
 const PickersToolbarTextRoot = styled(Typography)<{
-  component?: React.ElementType;
+  component?: ElementType;
 }>(({ theme }) => ({
   transition: theme.transitions.create('color'),
   color: theme.palette.text.secondary,
@@ -21,7 +21,7 @@ const PickersToolbarTextRoot = styled(Typography)<{
   },
 }));
 
-export const PickersToolbarText = React.forwardRef<HTMLSpanElement, PickersToolbarTextProps>(
+export const PickersToolbarText = forwardRef<HTMLSpanElement, PickersToolbarTextProps>(
   function PickersToolbarText(props, ref) {
     const { className, selected, value, ...other } = props;
 

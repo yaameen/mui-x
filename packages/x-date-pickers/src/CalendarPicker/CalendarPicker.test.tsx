@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {version} from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import {
@@ -156,7 +156,7 @@ describe('<CalendarPicker />', () => {
     );
 
     // onChange must be dispatched with newly selected date
-    expect(onChange.callCount).to.equal(React.version.startsWith('18') ? 2 : 1); // Strict Effects run mount effects twice
+    expect(onChange.callCount).to.equal(version.startsWith('18') ? 2 : 1); // Strict Effects run mount effects twice
     expect(onChange.lastCall.args[0]).toEqualDateTime(new Date(2018, 0, 1));
   });
 

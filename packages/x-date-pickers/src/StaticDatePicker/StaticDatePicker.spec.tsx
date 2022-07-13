@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
 {

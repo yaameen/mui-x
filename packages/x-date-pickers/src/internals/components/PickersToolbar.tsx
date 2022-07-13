@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, PropsWithChildren, RefAttributes, forwardRef, Ref} from 'react';
 import clsx from 'clsx';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -24,7 +24,7 @@ export interface PickersToolbarProps<TDate, TValue>
   viewType?: 'calendar' | 'clock';
   isLandscape: boolean;
   landscapeDirection?: 'row' | 'column';
-  toolbarTitle: React.ReactNode;
+  toolbarTitle: ReactNode;
 }
 
 const PickersToolbarRoot = styled('div', {
@@ -79,13 +79,13 @@ function defaultGetKeyboardInputSwitchingButtonText(
 }
 
 type PickersToolbarComponent = (<TDate, TValue>(
-  props: React.PropsWithChildren<PickersToolbarProps<TDate, TValue>> &
-    React.RefAttributes<HTMLDivElement>,
+  props: PropsWithChildren<PickersToolbarProps<TDate, TValue>> &
+    RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
-export const PickersToolbar = React.forwardRef(function PickersToolbar<TDate, TValue>(
-  props: React.PropsWithChildren<PickersToolbarProps<TDate, TValue>>,
-  ref: React.Ref<HTMLDivElement>,
+export const PickersToolbar = forwardRef(function PickersToolbar<TDate, TValue>(
+  props: PropsWithChildren<PickersToolbarProps<TDate, TValue>>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const {
     children,

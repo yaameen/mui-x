@@ -1,4 +1,3 @@
-import * as React from 'react';
 import MarkdownDocs from 'docs/src/modules/components/MarkdownDocs';
 import { demos, docs, demoComponents } from 'docsx/data/data-grid/sorting/sorting.md?@mui/markdown';
 

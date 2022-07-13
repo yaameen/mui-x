@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import { styled, useThemeProps } from '@mui/material/styles';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
@@ -22,7 +22,7 @@ const useUtilityClasses = (ownerState: PickerStaticWrapperProps) => {
 };
 
 export interface PickersStaticWrapperSlotsComponent {
-  ActionBar: React.ElementType<PickersActionBarProps>;
+  ActionBar: ElementType<PickersActionBarProps>;
 }
 
 export interface PickersStaticWrapperSlotsComponentsProps {
@@ -30,7 +30,7 @@ export interface PickersStaticWrapperSlotsComponentsProps {
 }
 
 export interface PickerStaticWrapperProps extends PickerStateWrapperProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   /**
    * Override or extend the styles applied to the component.
    */

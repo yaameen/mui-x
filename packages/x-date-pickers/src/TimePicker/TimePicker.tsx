@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import { useThemeProps } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
@@ -45,7 +45,7 @@ export interface TimePickerProps<TInputDate, TDate>
 }
 
 type TimePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: TimePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: TimePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -59,9 +59,9 @@ type TimePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [TimePicker API](https://mui.com/x/api/date-pickers/time-picker/)
  */
-export const TimePicker = React.forwardRef(function TimePicker<TInputDate, TDate = TInputDate>(
+export const TimePicker = forwardRef(function TimePicker<TInputDate, TDate = TInputDate>(
   inProps: TimePickerProps<TInputDate, TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const props = useThemeProps({ props: inProps, name: 'MuiTimePicker' });
   const {
@@ -302,7 +302,7 @@ TimePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**

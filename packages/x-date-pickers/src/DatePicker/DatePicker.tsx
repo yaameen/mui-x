@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import { useThemeProps } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
@@ -45,7 +45,7 @@ export interface DatePickerProps<TInputDate, TDate>
 }
 
 type DatePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: DatePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: DatePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -59,9 +59,9 @@ type DatePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [DatePicker API](https://mui.com/x/api/date-pickers/date-picker/)
  */
-export const DatePicker = React.forwardRef(function DatePicker<TInputDate, TDate = TInputDate>(
+export const DatePicker = forwardRef(function DatePicker<TInputDate, TDate = TInputDate>(
   inProps: DatePickerProps<TInputDate, TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const props = useThemeProps({ props: inProps, name: 'MuiDatePicker' });
   const {
@@ -327,12 +327,12 @@ DatePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => <span data-mui-test="loading-progress">...</span>
    */
   renderLoading: PropTypes.func,

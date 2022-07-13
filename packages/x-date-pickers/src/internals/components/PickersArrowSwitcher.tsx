@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, HTMLProps, ReactNode, forwardRef, Ref} from 'react';
 import clsx from 'clsx';
 import Typography from '@mui/material/Typography';
 import { generateUtilityClasses } from '@mui/material';
@@ -7,10 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowLeft, ArrowRight } from './icons';
 
 export interface PickersArrowSwitcherSlotsComponent {
-  LeftArrowButton: React.ElementType;
-  LeftArrowIcon: React.ElementType;
-  RightArrowButton: React.ElementType;
-  RightArrowIcon: React.ElementType;
+  LeftArrowButton: ElementType;
+  LeftArrowIcon: ElementType;
+  RightArrowButton: ElementType;
+  RightArrowIcon: ElementType;
 }
 
 export interface PickersArrowSwitcherSlotsComponentsProps {
@@ -43,8 +43,8 @@ export interface ExportedArrowSwitcherProps {
 
 interface ArrowSwitcherProps
   extends ExportedArrowSwitcherProps,
-    Omit<React.HTMLProps<HTMLDivElement>, 'ref'> {
-  children?: React.ReactNode;
+    Omit<HTMLProps<HTMLDivElement>, 'ref'> {
+  children?: ReactNode;
   isLeftDisabled: boolean;
   isLeftHidden?: boolean;
   isRightDisabled: boolean;
@@ -87,9 +87,9 @@ const PickersArrowSwitcherButton = styled(IconButton, {
   }),
 }));
 
-export const PickersArrowSwitcher = React.forwardRef(function PickersArrowSwitcher(
+export const PickersArrowSwitcher = forwardRef(function PickersArrowSwitcher(
   props: Omit<ArrowSwitcherProps, 'as'>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const {
     children,

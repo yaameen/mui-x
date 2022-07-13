@@ -1,10 +1,10 @@
-import * as React from 'react';
+import {HTMLAttributes} from 'react';
 import clsx from 'clsx';
 import { styled } from '@mui/material/styles';
 import { generateUtilityClasses } from '@mui/material';
 import { CLOCK_WIDTH, CLOCK_HOUR_WIDTH } from './shared';
 
-export interface ClockNumberProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface ClockNumberProps extends HTMLAttributes<HTMLSpanElement> {
   'aria-label': string;
   disabled: boolean;
   /**

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, useContext, SyntheticEvent, Fragment} from 'react';
 import Tab from '@mui/material/Tab';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { styled } from '@mui/material/styles';
@@ -29,9 +29,9 @@ const tabToView = (tab: TabValue): CalendarOrClockPickerView => {
 };
 
 export interface DateTimePickerTabsProps {
-  dateRangeIcon?: React.ReactNode;
+  dateRangeIcon?: ReactNode;
   onChange: (view: CalendarOrClockPickerView) => void;
-  timeIcon?: React.ReactNode;
+  timeIcon?: ReactNode;
   view: CalendarOrClockPickerView;
 }
 
@@ -59,10 +59,10 @@ export const DateTimePickerTabs = (props: DateTimePickerTabsProps) => {
 
   const localeText = useLocaleText();
 
-  const wrapperVariant = React.useContext(WrapperVariantContext);
+  const wrapperVariant = useContext(WrapperVariantContext);
   const ownerState = { ...props, wrapperVariant };
 
-  const handleChange = (event: React.SyntheticEvent, value: TabValue) => {
+  const handleChange = (event: SyntheticEvent, value: TabValue) => {
     onChange(tabToView(value));
   };
 
@@ -76,12 +76,12 @@ export const DateTimePickerTabs = (props: DateTimePickerTabsProps) => {
       <Tab
         value="date"
         aria-label={localeText.dateTableLabel}
-        icon={<React.Fragment>{dateRangeIcon}</React.Fragment>}
+        icon={<Fragment>{dateRangeIcon}</Fragment>}
       />
       <Tab
         value="time"
         aria-label={localeText.timeTableLabel}
-        icon={<React.Fragment>{timeIcon}</React.Fragment>}
+        icon={<Fragment>{timeIcon}</Fragment>}
       />
     </DateTimePickerTabsRoot>
   );

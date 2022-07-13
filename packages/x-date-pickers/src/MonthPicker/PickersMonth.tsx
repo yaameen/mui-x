@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, ElementType, FC} from 'react';
 import clsx from 'clsx';
 import Typography, { TypographyTypeMap } from '@mui/material/Typography';
 import { styled, alpha } from '@mui/material/styles';
@@ -9,7 +9,7 @@ import { onSpaceOrEnter } from '../internals/utils/utils';
 const classes = generateUtilityClasses('PrivatePickersMonth', ['root', 'selected']);
 
 export interface MonthProps {
-  children: React.ReactNode;
+  children: ReactNode;
   disabled?: boolean;
   onSelect: (value: any) => void;
   selected?: boolean;
@@ -19,7 +19,7 @@ export interface MonthProps {
 export type PickersMonthClassKey = keyof typeof classes;
 
 const PickersMonthRoot = styled<
-  OverridableComponent<TypographyTypeMap<{ component?: React.ElementType; disabled?: boolean }>>
+  OverridableComponent<TypographyTypeMap<{ component?: ElementType; disabled?: boolean }>>
 >(Typography)(({ theme }) => ({
   flex: '1 0 33.33%',
   display: 'flex',
@@ -53,7 +53,7 @@ const PickersMonthRoot = styled<
 /**
  * @ignore - do not document.
  */
-export const PickersMonth: React.FC<MonthProps> = (props) => {
+export const PickersMonth: FC<MonthProps> = (props) => {
   const { disabled, onSelect, selected, value, ...other } = props;
 
   const handleSelection = () => {

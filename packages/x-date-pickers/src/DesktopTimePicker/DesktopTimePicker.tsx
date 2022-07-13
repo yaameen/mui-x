@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   BaseTimePickerProps,
@@ -47,7 +47,7 @@ export interface DesktopTimePickerProps<TInputDate, TDate>
 }
 
 type DesktopTimePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: DesktopTimePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: DesktopTimePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -60,10 +60,10 @@ type DesktopTimePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [DesktopTimePicker API](https://mui.com/x/api/date-pickers/desktop-time-picker/)
  */
-export const DesktopTimePicker = React.forwardRef(function DesktopTimePicker<
+export const DesktopTimePicker = forwardRef(function DesktopTimePicker<
   TInputDate,
   TDate = TInputDate,
->(inProps: DesktopTimePickerProps<TInputDate, TDate>, ref: React.Ref<HTMLDivElement>) {
+>(inProps: DesktopTimePickerProps<TInputDate, TDate>, ref: Ref<HTMLDivElement>) {
   const props = useTimePickerDefaultizedProps<
     TInputDate,
     TDate,
@@ -322,7 +322,7 @@ DesktopTimePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, SVGAttributes, RefAttributes, forwardRef, Ref, useMemo, useCallback} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { unstable_useId as useId } from '@mui/utils';
@@ -64,18 +64,18 @@ export interface ExportedClockPickerProps<TDate> extends ExportedTimeValidationP
 }
 
 export interface ClockPickerSlotsComponent {
-  LeftArrowButton: React.ElementType;
-  LeftArrowIcon: React.ElementType;
-  RightArrowButton: React.ElementType;
-  RightArrowIcon: React.ElementType;
+  LeftArrowButton: ElementType;
+  LeftArrowIcon: ElementType;
+  RightArrowButton: ElementType;
+  RightArrowIcon: ElementType;
 }
 
 // We keep the interface to allow module augmentation
 export interface ClockPickerComponentsPropsOverrides {}
 
 export interface ClockPickerSlotsComponentsProps {
-  leftArrowButton: React.SVGAttributes<SVGSVGElement> & ClockPickerComponentsPropsOverrides;
-  rightArrowButton: React.SVGAttributes<SVGSVGElement> & ClockPickerComponentsPropsOverrides;
+  leftArrowButton: SVGAttributes<SVGSVGElement> & ClockPickerComponentsPropsOverrides;
+  rightArrowButton: SVGAttributes<SVGSVGElement> & ClockPickerComponentsPropsOverrides;
 }
 
 export interface ClockPickerProps<TDate> extends ExportedClockPickerProps<TDate> {
@@ -194,7 +194,7 @@ const ClockPickerArrowSwitcher = styled(PickersArrowSwitcher, {
 });
 
 type ClockPickerComponent = (<TDate>(
-  props: ClockPickerProps<TDate> & React.RefAttributes<HTMLDivElement>,
+  props: ClockPickerProps<TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 const deprecatedPropsWarning = buildDeprecatedPropsWarning(
@@ -207,9 +207,9 @@ const deprecatedPropsWarning = buildDeprecatedPropsWarning(
  *
  * - [ClockPicker API](https://mui.com/x/api/date-pickers/clock-picker/)
  */
-export const ClockPicker = React.forwardRef(function ClockPicker<TDate extends unknown>(
+export const ClockPicker = forwardRef(function ClockPicker<TDate extends unknown>(
   inProps: ClockPickerProps<TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const props = useThemeProps({
     props: inProps,
@@ -276,7 +276,7 @@ export const ClockPicker = React.forwardRef(function ClockPicker<TDate extends u
   const now = useNow<TDate>();
   const utils = useUtils<TDate>();
 
-  const dateOrMidnight = React.useMemo(
+  const dateOrMidnight = useMemo(
     () => date || utils.setSeconds(utils.setMinutes(utils.setHours(now, 0), 0), 0),
     [date, now, utils],
   );
@@ -287,7 +287,7 @@ export const ClockPicker = React.forwardRef(function ClockPicker<TDate extends u
     handleChangeAndOpenNext,
   );
 
-  const isTimeDisabled = React.useCallback(
+  const isTimeDisabled = useCallback(
     (rawValue: number, viewType: ClockPickerView) => {
       const isAfter = createIsAfterIgnoreDatePart(disableIgnoringDatePartForTimeValidation, utils);
 
@@ -360,7 +360,7 @@ export const ClockPicker = React.forwardRef(function ClockPicker<TDate extends u
 
   const selectedId = useId();
 
-  const viewProps = React.useMemo(() => {
+  const viewProps = useMemo(() => {
     switch (openView) {
       case 'hours': {
         const handleHoursChange = (value: number, isFinish?: PickerSelectionState) => {

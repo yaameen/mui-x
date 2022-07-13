@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, useMemo} from 'react';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { generateUtilityClasses } from '@mui/material';
@@ -35,15 +35,15 @@ const DatePickerToolbarTitle = styled(Typography, {
 }));
 
 type DatePickerToolbarComponent = (<TDate>(
-  props: BaseToolbarProps<TDate, TDate | null> & React.RefAttributes<HTMLDivElement>,
+  props: BaseToolbarProps<TDate, TDate | null> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
  * @ignore - internal component.
  */
-export const DatePickerToolbar = React.forwardRef(function DatePickerToolbar<TDate>(
+export const DatePickerToolbar = forwardRef(function DatePickerToolbar<TDate>(
   props: BaseToolbarProps<TDate, TDate | null>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const {
     parsedValue,
@@ -59,7 +59,7 @@ export const DatePickerToolbar = React.forwardRef(function DatePickerToolbar<TDa
   } = props;
   const utils = useUtils<TDate>();
 
-  const dateText = React.useMemo(() => {
+  const dateText = useMemo(() => {
     if (!parsedValue) {
       return toolbarPlaceholder;
     }

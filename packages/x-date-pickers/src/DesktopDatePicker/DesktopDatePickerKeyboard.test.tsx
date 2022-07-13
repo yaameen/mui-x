@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import { isWeekend } from 'date-fns';
@@ -12,7 +12,7 @@ function TestKeyboardDatePicker(
   PickerProps: MakeOptional<DesktopDatePickerProps<any, any>, 'value' | 'onChange' | 'renderInput'>,
 ) {
   const { onChange: propsOnChange, value: propsValue, ...other } = PickerProps;
-  const [value, setValue] = React.useState<unknown>(
+  const [value, setValue] = useState<unknown>(
     propsValue ?? adapterToUse.date(new Date(2019, 0, 1)),
   );
 
@@ -174,7 +174,7 @@ describe('<DesktopDatePicker /> keyboard interactions', () => {
         const onErrorMock = spy();
         // we are running validation on value change
         function DatePickerInput() {
-          const [date, setDate] = React.useState<number | Date | null>(null);
+          const [date, setDate] = useState<number | Date | null>(null);
 
           return (
             <DesktopDatePicker

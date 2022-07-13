@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import { spy } from 'sinon';
 import { expect } from 'chai';
@@ -224,7 +224,7 @@ describe('<DesktopTimePicker />', () => {
 
         // we are running validation on value change
         function TimePickerInput() {
-          const [time, setTime] = React.useState<Date | null>(null);
+          const [time, setTime] = useState<Date | null>(null);
 
           return (
             <DesktopTimePicker

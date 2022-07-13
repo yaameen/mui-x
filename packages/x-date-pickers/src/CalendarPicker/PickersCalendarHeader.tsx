@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, ComponentPropsWithRef} from 'react';
 import Fade from '@mui/material/Fade';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
@@ -26,8 +26,8 @@ export type ExportedCalendarHeaderProps<TDate> = Pick<
 >;
 
 export interface PickersCalendarHeaderSlotsComponent extends PickersArrowSwitcherSlotsComponent {
-  SwitchViewButton: React.ElementType;
-  SwitchViewIcon: React.ElementType;
+  SwitchViewButton: ElementType;
+  SwitchViewIcon: ElementType;
 }
 
 // We keep the interface to allow module augmentation
@@ -35,7 +35,7 @@ export interface PickersCalendarHeaderComponentsPropsOverrides {}
 
 export interface PickersCalendarHeaderSlotsComponentsProps
   extends PickersArrowSwitcherSlotsComponentsProps {
-  switchViewButton: React.ComponentPropsWithRef<typeof IconButton> &
+  switchViewButton: ComponentPropsWithRef<typeof IconButton> &
     PickersCalendarHeaderComponentsPropsOverrides;
 }
 

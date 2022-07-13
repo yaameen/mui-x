@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, JSXElementConstructor, Ref, ReactNode, MouseEventHandler, TouchEventHandler, useRef, useEffect, KeyboardEvent, MouseEvent, TouchEvent} from 'react';
 import Grow from '@mui/material/Grow';
 import Paper, { PaperProps as MuiPaperProps } from '@mui/material/Paper';
 import Popper, { PopperProps as MuiPopperProps } from '@mui/material/Popper';
@@ -9,7 +9,7 @@ import { TransitionProps as MuiTransitionProps } from '@mui/material/transitions
 import { PickersActionBar, PickersActionBarProps } from '../../PickersActionBar';
 
 export interface PickersPopperSlotsComponent {
-  ActionBar: React.ElementType<PickersActionBarProps>;
+  ActionBar: ElementType<PickersActionBarProps>;
 }
 export interface PickersPopperSlotsComponentsProps {
   actionBar: Omit<PickersActionBarProps, 'onAccept' | 'onClear' | 'onCancel' | 'onSetToday'>;
@@ -30,7 +30,7 @@ export interface ExportedPickerPopperProps {
   /**
    * Custom component for popper [Transition](https://mui.com/material-ui/transitions/#transitioncomponent-prop).
    */
-  TransitionComponent?: React.JSXElementConstructor<MuiTransitionProps>;
+  TransitionComponent?: JSXElementConstructor<MuiTransitionProps>;
 }
 
 export interface PickerPopperProps extends ExportedPickerPopperProps, ExportedPickerPaperProps {
@@ -38,8 +38,8 @@ export interface PickerPopperProps extends ExportedPickerPopperProps, ExportedPi
   TrapFocusProps?: Partial<MuiTrapFocusProps>;
   anchorEl: MuiPopperProps['anchorEl'];
   open: MuiPopperProps['open'];
-  containerRef?: React.Ref<HTMLDivElement>;
-  children?: React.ReactNode;
+  containerRef?: Ref<HTMLDivElement>;
+  children?: ReactNode;
   onClose: () => void;
   onBlur?: () => void;
   onClear: () => void;
@@ -83,14 +83,14 @@ type OnClickAway = (event: MouseEvent | TouchEvent) => void;
 function useClickAwayListener(
   active: boolean,
   onClickAway: OnClickAway,
-): [React.Ref<Element>, React.MouseEventHandler, React.TouchEventHandler] {
-  const movedRef = React.useRef(false);
-  const syntheticEventRef = React.useRef(false);
+): [Ref<Element>, MouseEventHandler, TouchEventHandler] {
+  const movedRef = useRef(false);
+  const syntheticEventRef = useRef(false);
 
-  const nodeRef = React.useRef<Element>(null);
+  const nodeRef = useRef<Element>(null);
 
-  const activatedRef = React.useRef(false);
-  React.useEffect(() => {
+  const activatedRef = useRef(false);
+  useEffect(() => {
     if (!active) {
       return undefined;
     }
@@ -167,7 +167,7 @@ function useClickAwayListener(
     syntheticEventRef.current = true;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (active) {
       const doc = ownerDocument(nodeRef.current);
 
@@ -186,7 +186,7 @@ function useClickAwayListener(
     return undefined;
   }, [active, handleClickAway]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // TODO This behavior is not tested automatically
     // It's unclear whether this is due to different update semantics in test (batched in act() vs discrete on click).
     // Or if this is a timing related issues due to different Transition components
@@ -229,7 +229,7 @@ export const PickersPopper = (props: PickerPopperProps) => {
     componentsProps,
   } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleKeyDown(nativeEvent: KeyboardEvent) {
       // IE11, Edge (prior to using Bink?) use 'Esc'
       if (open && (nativeEvent.key === 'Escape' || nativeEvent.key === 'Esc')) {
@@ -244,8 +244,8 @@ export const PickersPopper = (props: PickerPopperProps) => {
     };
   }, [onClose, open]);
 
-  const lastFocusedElementRef = React.useRef<Element | null>(null);
-  React.useEffect(() => {
+  const lastFocusedElementRef = useRef<Element | null>(null);
+  useEffect(() => {
     if (role === 'tooltip') {
       return;
     }
@@ -264,9 +264,9 @@ export const PickersPopper = (props: PickerPopperProps) => {
     open,
     onBlur ?? onClose,
   );
-  const paperRef = React.useRef<HTMLDivElement>(null);
+  const paperRef = useRef<HTMLDivElement>(null);
   const handleRef = useForkRef(paperRef, containerRef);
-  const handlePaperRef = useForkRef(handleRef, clickAwayRef as React.Ref<HTMLDivElement>);
+  const handlePaperRef = useForkRef(handleRef, clickAwayRef as Ref<HTMLDivElement>);
 
   const ownerState = props;
   const {
@@ -275,7 +275,7 @@ export const PickersPopper = (props: PickerPopperProps) => {
     ...otherPaperProps
   } = PaperProps;
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       // stop the propagation to avoid closing parent modal
       event.stopPropagation();
@@ -308,13 +308,13 @@ export const PickersPopper = (props: PickerPopperProps) => {
               tabIndex={-1}
               elevation={8}
               ref={handlePaperRef}
-              onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+              onClick={(event: MouseEvent<HTMLDivElement, MouseEvent>) => {
                 onPaperClick(event);
                 if (onPaperClickProp) {
                   onPaperClickProp(event);
                 }
               }}
-              onTouchStart={(event: React.TouchEvent<HTMLDivElement>) => {
+              onTouchStart={(event: TouchEvent<HTMLDivElement>) => {
                 onPaperTouchStart(event);
                 if (onPaperTouchStartProp) {
                   onPaperTouchStartProp(event);

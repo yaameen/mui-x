@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {createRef} from 'react';
 import { expect } from 'chai';
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -9,7 +9,7 @@ describe('<DatePicker />', () => {
 
   describe('prop: inputRef', () => {
     it('should forward ref to the text box', () => {
-      const inputRef = React.createRef<HTMLInputElement>();
+      const inputRef = createRef<HTMLInputElement>();
       render(
         <DatePicker
           inputRef={inputRef}

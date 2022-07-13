@@ -1,4 +1,3 @@
-import * as React from 'react';
 import moment, { Moment } from 'moment';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 

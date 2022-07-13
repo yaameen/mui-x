@@ -1,9 +1,9 @@
-import * as React from 'react';
+import {HTMLAttributes, Component} from 'react';
 import { styled } from '@mui/material/styles';
 import { CLOCK_WIDTH, CLOCK_HOUR_WIDTH } from './shared';
 import { ClockPickerView } from '../internals/models';
 
-export interface ClockPointerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ClockPointerProps extends HTMLAttributes<HTMLDivElement> {
   hasSelected: boolean;
   isInner: boolean;
   type: ClockPickerView;
@@ -45,7 +45,7 @@ const ClockPointerThumb = styled('div')<{
  * @ignore - internal component.
  * TODO: Remove class
  */
-export class ClockPointer extends React.Component<ClockPointerProps> {
+export class ClockPointer extends Component<ClockPointerProps> {
   static getDerivedStateFromProps = (
     nextProps: ClockPointerProps,
     state: ClockPointer['state'],

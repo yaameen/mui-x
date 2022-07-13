@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {forwardRef, Ref, useContext, useRef, useState, useCallback, SyntheticEvent, KeyboardEvent} from 'react';
 import PropTypes from 'prop-types';
 import { useTheme, styled, useThemeProps as useThemProps } from '@mui/material/styles';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
@@ -49,9 +49,9 @@ type YearPickerComponent = (<TDate>(props: YearPickerProps<TDate>) => JSX.Elemen
   propTypes?: any;
 };
 
-export const YearPicker = React.forwardRef(function YearPicker<TDate>(
+export const YearPicker = forwardRef(function YearPicker<TDate>(
   inProps: YearPickerProps<TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const now = useNow<TDate>();
   const theme = useTheme();
@@ -78,11 +78,11 @@ export const YearPicker = React.forwardRef(function YearPicker<TDate>(
 
   const selectedDate = date || now;
   const currentYear = utils.getYear(selectedDate);
-  const wrapperVariant = React.useContext(WrapperVariantContext);
-  const selectedYearRef = React.useRef<HTMLButtonElement>(null);
-  const [focusedYear, setFocusedYear] = React.useState<number | null>(currentYear);
+  const wrapperVariant = useContext(WrapperVariantContext);
+  const selectedYearRef = useRef<HTMLButtonElement>(null);
+  const [focusedYear, setFocusedYear] = useState<number | null>(currentYear);
 
-  const isYearDisabled = React.useCallback(
+  const isYearDisabled = useCallback(
     (dateToValidate: TDate) => {
       if (disablePast && utils.isBeforeYear(dateToValidate, now)) {
         return true;
@@ -105,7 +105,7 @@ export const YearPicker = React.forwardRef(function YearPicker<TDate>(
   );
 
   const handleYearSelection = (
-    event: React.SyntheticEvent,
+    event: SyntheticEvent,
     year: number,
     isFinish: PickerSelectionState = 'finish',
   ) => {
@@ -118,7 +118,7 @@ export const YearPicker = React.forwardRef(function YearPicker<TDate>(
     onChange(newDate, isFinish);
   };
 
-  const focusYear = React.useCallback(
+  const focusYear = useCallback(
     (year: number) => {
       if (!isYearDisabled(utils.setYear(selectedDate, year))) {
         setFocusedYear(year);
@@ -129,7 +129,7 @@ export const YearPicker = React.forwardRef(function YearPicker<TDate>(
 
   const yearsInRow = wrapperVariant === 'desktop' ? 4 : 3;
 
-  const handleKeyDown = (event: React.KeyboardEvent, year: number) => {
+  const handleKeyDown = (event: KeyboardEvent, year: number) => {
     switch (event.key) {
       case 'ArrowUp':
         focusYear(year - yearsInRow);

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useTheme, styled, Theme } from '@mui/material/styles';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import { PickersToolbarText } from '../internals/components/PickersToolbarText';

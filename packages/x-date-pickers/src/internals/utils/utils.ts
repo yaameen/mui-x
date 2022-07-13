@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {KeyboardEvent} from 'react';
 
 /* Use it instead of .includes method for IE support */
 export function arrayIncludes<T>(array: T[] | readonly T[], itemOrItems: T | T[]) {
@@ -10,8 +10,8 @@ export function arrayIncludes<T>(array: T[] | readonly T[], itemOrItems: T | T[]
 }
 
 export const onSpaceOrEnter =
-  (innerFn: () => void, onFocus?: (event: React.KeyboardEvent<any>) => void) =>
-  (event: React.KeyboardEvent) => {
+  (innerFn: () => void, onFocus?: (event: KeyboardEvent<any>) => void) =>
+  (event: KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       innerFn();
 

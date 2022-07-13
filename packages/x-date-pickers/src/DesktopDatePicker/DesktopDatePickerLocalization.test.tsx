@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, useState} from 'react';
 import { expect } from 'chai';
 import deLocale from 'date-fns/locale/de';
 import enLocale from 'date-fns/locale/en-US';
@@ -28,13 +28,13 @@ describe('<DesktopDatePicker /> localization', () => {
       const { render: localizedRender } = createPickerRenderer({ locale: dateFnsLocale });
 
       interface FormProps {
-        Picker: React.ElementType<DesktopDatePickerProps<any, any>>;
+        Picker: ElementType<DesktopDatePickerProps<any, any>>;
         PickerProps: Partial<DesktopDatePickerProps<any, any>>;
       }
 
       const Form = (props: FormProps) => {
         const { Picker, PickerProps } = props;
-        const [value, setValue] = React.useState<unknown>(adapterToUse.date('01/01/2020'));
+        const [value, setValue] = useState<unknown>(adapterToUse.date('01/01/2020'));
 
         return (
           <Picker

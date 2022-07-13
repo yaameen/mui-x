@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, Ref, ReactNode, ReactElement, forwardRef, useMemo} from 'react';
 import { TextFieldProps as MuiTextFieldPropsType } from '@mui/material/TextField';
 import { IconButtonProps } from '@mui/material/IconButton';
 import { InputAdornmentProps } from '@mui/material/InputAdornment';
@@ -12,7 +12,7 @@ export type MuiTextFieldProps = MuiTextFieldPropsType | Omit<MuiTextFieldPropsTy
 
 export interface DateInputSlotsComponent {
   // Icon displaying for open picker button.
-  OpenPickerIcon: React.ElementType;
+  OpenPickerIcon: ElementType;
 }
 
 export interface DateInputProps<TInputDate, TDate> {
@@ -57,7 +57,7 @@ export interface DateInputProps<TInputDate, TDate> {
   /**
    * Pass a ref to the `input` element.
    */
-  inputRef?: React.Ref<HTMLInputElement>;
+  inputRef?: Ref<HTMLInputElement>;
   label?: MuiTextFieldProps['label'];
   /**
    * Custom mask. Can be used to override generate from format. (e.g. `__/__/____ __:__` or `__/__/____ __:__ _M`).
@@ -82,9 +82,9 @@ export interface DateInputProps<TInputDate, TDate> {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
-  renderInput: (props: MuiTextFieldPropsType) => React.ReactElement;
+  renderInput: (props: MuiTextFieldPropsType) => ReactElement;
   /**
    * Custom formatter to be passed into Rifm component.
    * @param {string} str The un-formatted string.
@@ -111,9 +111,9 @@ export type ExportedDateInputProps<TInputDate, TDate> = Omit<
 >;
 
 // TODO: why is this called "Pure*" when it's not memoized? Does "Pure" mean "readonly"?
-export const PureDateInput = React.forwardRef(function PureDateInput<TInputDate, TDate>(
+export const PureDateInput = forwardRef(function PureDateInput<TInputDate, TDate>(
   props: DateInputProps<TInputDate, TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const {
     disabled,
@@ -136,7 +136,7 @@ export const PureDateInput = React.forwardRef(function PureDateInput<TInputDate,
   const getOpenDialogAriaText = getOpenDialogAriaTextProp ?? localeText.openDatePickerDialogue;
 
   const utils = useUtils<TDate>();
-  const PureDateInputProps = React.useMemo(
+  const PureDateInputProps = useMemo(
     () => ({
       ...InputProps,
       readOnly: true,

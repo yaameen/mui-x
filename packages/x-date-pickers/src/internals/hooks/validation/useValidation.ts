@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useRef, useEffect} from 'react';
 import { useLocalizationContext } from '../useUtils';
 import { MuiPickersAdapterContextValue } from '../../../LocalizationProvider/LocalizationProvider';
 
@@ -34,11 +34,11 @@ export function useValidation<TDate, TProps extends ValidationProps<any, any>>(
 ): InferError<TProps> {
   const { value, onError } = props;
   const adapter = useLocalizationContext<TDate>();
-  const previousValidationErrorRef = React.useRef<InferError<TProps> | null>(null);
+  const previousValidationErrorRef = useRef<InferError<TProps> | null>(null);
 
   const validationError = validate({ adapter, value, props });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (onError && !isSameError(validationError, previousValidationErrorRef.current)) {
       onError(validationError, value);
     }

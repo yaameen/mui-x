@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, MouseEvent, KeyboardEvent, forwardRef, useRef, Ref, useContext, useEffect} from 'react';
 import clsx from 'clsx';
 import { useForkRef, capitalize } from '@mui/material/utils';
 import { alpha, styled } from '@mui/material/styles';
@@ -14,7 +14,7 @@ import {
 
 export interface YearProps {
   autoFocus?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
   // The below line triggers a false-positive ESLint error - `classes` are used below.
   // eslint-disable-next-line react/no-unused-prop-types
   classes?: {
@@ -27,8 +27,8 @@ export interface YearProps {
   };
   className?: string;
   disabled?: boolean;
-  onClick: (event: React.MouseEvent, value: number) => void;
-  onKeyDown: (event: React.KeyboardEvent, value: number) => void;
+  onClick: (event: MouseEvent, value: number) => void;
+  onKeyDown: (event: KeyboardEvent, value: number) => void;
   selected: boolean;
   value: number;
 }
@@ -98,14 +98,14 @@ const PickersYearButton = styled('button')<{
 /**
  * @ignore - internal component.
  */
-export const PickersYear = React.forwardRef<HTMLButtonElement, YearProps>(function PickersYear(
+export const PickersYear = forwardRef<HTMLButtonElement, YearProps>(function PickersYear(
   props,
   forwardedRef,
 ) {
   const { autoFocus, className, children, disabled, onClick, onKeyDown, selected, value } = props;
-  const ref = React.useRef<HTMLButtonElement>(null);
-  const refHandle = useForkRef(ref, forwardedRef as React.Ref<HTMLButtonElement>);
-  const wrapperVariant = React.useContext(WrapperVariantContext);
+  const ref = useRef<HTMLButtonElement>(null);
+  const refHandle = useForkRef(ref, forwardedRef as Ref<HTMLButtonElement>);
+  const wrapperVariant = useContext(WrapperVariantContext);
 
   const ownerState = {
     ...props,
@@ -115,7 +115,7 @@ export const PickersYear = React.forwardRef<HTMLButtonElement, YearProps>(functi
   const classes = useUtilityClasses(ownerState);
 
   // TODO: Can we just forward this to the button?
-  React.useEffect(() => {
+  useEffect(() => {
     if (autoFocus) {
       // `ref.current` being `null` would be a bug in MUIu
       ref.current!.focus();

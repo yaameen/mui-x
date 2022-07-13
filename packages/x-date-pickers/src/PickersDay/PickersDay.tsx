@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, useRef, FocusEvent, MouseEvent, KeyboardEvent, memo} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { CSSInterpolation, SxProps } from '@mui/system';
@@ -182,12 +182,12 @@ const PickersDayFiller = styled('div', {
 const noop = () => {};
 
 type PickersDayComponent = (<TDate>(
-  props: PickersDayProps<TDate> & React.RefAttributes<HTMLButtonElement>,
+  props: PickersDayProps<TDate> & RefAttributes<HTMLButtonElement>,
 ) => JSX.Element) & { propTypes?: any };
 
-const PickersDayRaw = React.forwardRef(function PickersDay<TDate>(
+const PickersDayRaw = forwardRef(function PickersDay<TDate>(
   inProps: PickersDayProps<TDate>,
-  forwardedRef: React.Ref<HTMLButtonElement>,
+  forwardedRef: Ref<HTMLButtonElement>,
 ) {
   const props = useThemeProps<Theme, PickersDayProps<TDate>, 'MuiPickersDay'>({
     props: inProps,
@@ -229,7 +229,7 @@ const PickersDayRaw = React.forwardRef(function PickersDay<TDate>(
   const classes = useUtilityClasses(ownerState);
 
   const utils = useUtils<TDate>();
-  const ref = React.useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
   const handleRef = useForkRef(ref, forwardedRef);
 
   // Since this is rendered when a Popper is opened we can't use passive effects.
@@ -241,7 +241,7 @@ const PickersDayRaw = React.forwardRef(function PickersDay<TDate>(
     }
   }, [autoFocus, disabled, isAnimating, outsideCurrentMonth]);
 
-  const handleFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
+  const handleFocus = (event: FocusEvent<HTMLButtonElement>) => {
     if (onDayFocus) {
       onDayFocus(day);
     }
@@ -251,7 +251,7 @@ const PickersDayRaw = React.forwardRef(function PickersDay<TDate>(
     }
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!disabled) {
       onDaySelect(day, 'finish');
     }
@@ -263,7 +263,7 @@ const PickersDayRaw = React.forwardRef(function PickersDay<TDate>(
 
   const theme = useTheme();
 
-  function handleKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (onKeyDown !== undefined) {
       onKeyDown(event);
     }
@@ -425,4 +425,4 @@ PickersDayRaw.propTypes = {
  *
  * - [PickersDay API](https://mui.com/x/api/date-pickers/pickers-day/)
  */
-export const PickersDay = React.memo(PickersDayRaw, areDayPropsEqual) as PickersDayComponent;
+export const PickersDay = memo(PickersDayRaw, areDayPropsEqual) as PickersDayComponent;

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useContext} from 'react';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import { useLocaleText } from '../internals/hooks/useUtils';
@@ -26,7 +26,7 @@ export interface PickersActionBarProps {
 
 export const PickersActionBar = (props: PickersActionBarProps) => {
   const { onAccept, onClear, onCancel, onSetToday, actions } = props;
-  const wrapperVariant = React.useContext(WrapperVariantContext);
+  const wrapperVariant = useContext(WrapperVariantContext);
 
   const localeText = useLocaleText();
 

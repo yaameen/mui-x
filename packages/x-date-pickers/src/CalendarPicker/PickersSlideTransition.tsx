@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactElement, Key, cloneElement} from 'react';
 import clsx from 'clsx';
 import { styled } from '@mui/material/styles';
 import { generateUtilityClasses } from '@mui/material';
@@ -8,11 +8,11 @@ import { TransitionGroupProps } from 'react-transition-group/TransitionGroup';
 
 export type SlideDirection = 'right' | 'left';
 export interface SlideTransitionProps extends Omit<CSSTransitionProps, 'timeout'> {
-  children: React.ReactElement;
+  children: ReactElement;
   className?: string;
   reduceAnimations: boolean;
   slideDirection: SlideDirection;
-  transKey: React.Key;
+  transKey: Key;
 }
 
 const classes = generateUtilityClasses('PrivatePickersSlideTransition', [
@@ -105,8 +105,8 @@ export const PickersSlideTransition = ({
   return (
     <PickersSlideTransitionRoot
       className={clsx(classes.root, className)}
-      childFactory={(element: React.ReactElement) =>
-        React.cloneElement(element, {
+      childFactory={(element: ReactElement) =>
+        cloneElement(element, {
           classNames: transitionClasses,
         })
       }

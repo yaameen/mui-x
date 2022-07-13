@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ElementType, PropsWithChildren} from 'react';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog, { DialogProps as MuiDialogProps, dialogClasses } from '@mui/material/Dialog';
 import { styled } from '@mui/material/styles';
@@ -7,7 +7,7 @@ import { PickersActionBar, PickersActionBarProps } from '../../PickersActionBar'
 import { PickerStateWrapperProps } from '../hooks/usePickerState';
 
 export interface PickersModalDialogSlotsComponent {
-  ActionBar: React.ElementType<PickersActionBarProps>;
+  ActionBar: ElementType<PickersActionBarProps>;
 }
 export interface PickersModalDialogSlotsComponentsProps {
   actionBar: Omit<PickersActionBarProps, 'onAccept' | 'onClear' | 'onCancel' | 'onSetToday'>;
@@ -49,7 +49,7 @@ const PickersModalDialogContent = styled(DialogContent)({
   },
 });
 
-export const PickersModalDialog = (props: React.PropsWithChildren<PickersModalDialogProps>) => {
+export const PickersModalDialog = (props: PropsWithChildren<PickersModalDialogProps>) => {
   const {
     children,
     DialogProps = {},

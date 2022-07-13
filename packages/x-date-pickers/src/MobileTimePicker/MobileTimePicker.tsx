@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   BaseTimePickerProps,
@@ -46,7 +46,7 @@ export interface MobileTimePickerProps<TInputDate, TDate>
 }
 
 type MobileTimePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: MobileTimePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: MobileTimePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -59,10 +59,10 @@ type MobileTimePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [MobileTimePicker API](https://mui.com/x/api/date-pickers/mobile-time-picker/)
  */
-export const MobileTimePicker = React.forwardRef(function MobileTimePicker<
+export const MobileTimePicker = forwardRef(function MobileTimePicker<
   TInputDate,
   TDate = TInputDate,
->(inProps: MobileTimePickerProps<TInputDate, TDate>, ref: React.Ref<HTMLDivElement>) {
+>(inProps: MobileTimePickerProps<TInputDate, TDate>, ref: Ref<HTMLDivElement>) {
   const props = useTimePickerDefaultizedProps<
     TInputDate,
     TDate,
@@ -314,7 +314,7 @@ MobileTimePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**

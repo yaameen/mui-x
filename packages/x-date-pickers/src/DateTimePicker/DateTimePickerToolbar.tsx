@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useContext, useMemo, Fragment} from 'react';
 import { styled } from '@mui/material/styles';
 import { generateUtilityClasses } from '@mui/material';
 import { PickersToolbarText } from '../internals/components/PickersToolbarText';
@@ -84,7 +84,7 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
     ...other
   } = props;
   const utils = useUtils<TDate>();
-  const wrapperVariant = React.useContext(WrapperVariantContext);
+  const wrapperVariant = useContext(WrapperVariantContext);
   const showTabs =
     wrapperVariant === 'desktop'
       ? true
@@ -93,7 +93,7 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
   const formatHours = (time: TDate) =>
     ampm ? utils.format(time, 'hours12h') : utils.format(time, 'hours24h');
 
-  const dateText = React.useMemo(() => {
+  const dateText = useMemo(() => {
     if (!parsedValue) {
       return toolbarPlaceholder;
     }
@@ -108,7 +108,7 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
   const ownerState = props;
 
   return (
-    <React.Fragment>
+    <Fragment>
       {wrapperVariant !== 'desktop' && (
         <DateTimePickerToolbarRoot
           toolbarTitle={toolbarTitle}
@@ -158,7 +158,7 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
               />
             )}
             {views.includes('minutes') && (
-              <React.Fragment>
+              <Fragment>
                 <DateTimePickerToolbarSeparator
                   variant="h3"
                   value=":"
@@ -172,10 +172,10 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
                   selected={openView === 'minutes'}
                   value={parsedValue ? utils.format(parsedValue, 'minutes') : '--'}
                 />
-              </React.Fragment>
+              </Fragment>
             )}
             {views.includes('seconds') && (
-              <React.Fragment>
+              <Fragment>
                 <DateTimePickerToolbarSeparator
                   variant="h3"
                   value=":"
@@ -189,7 +189,7 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
                   selected={openView === 'seconds'}
                   value={parsedValue ? utils.format(parsedValue, 'seconds') : '--'}
                 />
-              </React.Fragment>
+              </Fragment>
             )}
           </DateTimePickerToolbarTimeContainer>
         </DateTimePickerToolbarRoot>
@@ -202,6 +202,6 @@ export const DateTimePickerToolbar = <TDate extends unknown>(
           onChange={setOpenView}
         />
       )}
-    </React.Fragment>
+    </Fragment>
   );
 };

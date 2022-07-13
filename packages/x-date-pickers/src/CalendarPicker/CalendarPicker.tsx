@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, RefAttributes, forwardRef, Ref, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, useThemeProps } from '@mui/material/styles';
@@ -85,10 +85,10 @@ export interface CalendarPickerProps<TDate>
   reduceAnimations?: boolean;
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => <span data-mui-test="loading-progress">...</span>
    */
-  renderLoading?: () => React.ReactNode;
+  renderLoading?: () => ReactNode;
   /**
    * Controlled open view.
    */
@@ -159,7 +159,7 @@ const CalendarPickerViewTransitionContainer = styled(PickersFadeTransitionGroup,
 });
 
 type CalendarPickerComponent = (<TDate>(
-  props: CalendarPickerProps<TDate> & React.RefAttributes<HTMLDivElement>,
+  props: CalendarPickerProps<TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -172,9 +172,9 @@ type CalendarPickerComponent = (<TDate>(
  *
  * - [CalendarPicker API](https://mui.com/x/api/date-pickers/calendar-picker/)
  */
-const CalendarPicker = React.forwardRef(function CalendarPicker<TDate>(
+const CalendarPicker = forwardRef(function CalendarPicker<TDate>(
   inProps: CalendarPickerProps<TDate>,
-  ref: React.Ref<HTMLDivElement>,
+  ref: Ref<HTMLDivElement>,
 ) {
   const utils = useUtils<TDate>();
   const defaultDates = useDefaultDates<TDate>();
@@ -238,7 +238,7 @@ const CalendarPicker = React.forwardRef(function CalendarPicker<TDate>(
     disableFuture,
   });
 
-  const handleDateMonthChange = React.useCallback<MonthPickerProps<TDate>['onChange']>(
+  const handleDateMonthChange = useCallback<MonthPickerProps<TDate>['onChange']>(
     (newDate, selectionState) => {
       const startOfMonth = utils.startOfMonth(newDate);
       const endOfMonth = utils.endOfMonth(newDate);
@@ -282,7 +282,7 @@ const CalendarPicker = React.forwardRef(function CalendarPicker<TDate>(
 
   // TODO: Use same behavior as `handleDateMonthChange` to avoid selecting a date in another year.
   // Needs startOfYear / endOfYear methods in adapter.
-  const handleDateYearChange = React.useCallback<YearPickerProps<TDate>['onChange']>(
+  const handleDateYearChange = useCallback<YearPickerProps<TDate>['onChange']>(
     (newDate, selectionState) => {
       const startOfYear = utils.startOfYear(newDate);
       const endOfYear = utils.endOfYear(newDate);
@@ -324,7 +324,7 @@ const CalendarPicker = React.forwardRef(function CalendarPicker<TDate>(
     ],
   );
 
-  const onSelectedDayChange = React.useCallback<DayPickerProps<TDate>['onSelectedDaysChange']>(
+  const onSelectedDayChange = useCallback<DayPickerProps<TDate>['onSelectedDaysChange']>(
     (day, isFinish) => {
       if (date && day) {
         // If there is a date already selected, then we want to keep its time
@@ -336,7 +336,7 @@ const CalendarPicker = React.forwardRef(function CalendarPicker<TDate>(
     [utils, date, onChange],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (date && isDateDisabled(date)) {
       const closestEnabledDate = findClosestEnabledDate({
         utils,
@@ -354,7 +354,7 @@ const CalendarPicker = React.forwardRef(function CalendarPicker<TDate>(
     // So just ensure that we are not rendering disabled as selected on mount.
   }, []); // eslint-disable-line
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (date) {
       changeMonth(date);
     }
@@ -563,7 +563,7 @@ CalendarPicker.propTypes = {
   renderDay: PropTypes.func,
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => <span data-mui-test="loading-progress">...</span>
    */
   renderLoading: PropTypes.func,

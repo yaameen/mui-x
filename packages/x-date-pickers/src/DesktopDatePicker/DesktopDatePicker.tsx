@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   BaseDatePickerProps,
@@ -45,7 +45,7 @@ export interface DesktopDatePickerProps<TInputDate, TDate>
 }
 
 type DesktopDatePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: DesktopDatePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: DesktopDatePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -58,10 +58,10 @@ type DesktopDatePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [DesktopDatePicker API](https://mui.com/x/api/date-pickers/desktop-date-picker/)
  */
-export const DesktopDatePicker = React.forwardRef(function DesktopDatePicker<
+export const DesktopDatePicker = forwardRef(function DesktopDatePicker<
   TInputDate,
   TDate = TInputDate,
->(inProps: DesktopDatePickerProps<TInputDate, TDate>, ref: React.Ref<HTMLDivElement>) {
+>(inProps: DesktopDatePickerProps<TInputDate, TDate>, ref: Ref<HTMLDivElement>) {
   const props = useDatePickerDefaultizedProps<
     TInputDate,
     TDate,
@@ -345,12 +345,12 @@ DesktopDatePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => <span data-mui-test="loading-progress">...</span>
    */
   renderLoading: PropTypes.func,

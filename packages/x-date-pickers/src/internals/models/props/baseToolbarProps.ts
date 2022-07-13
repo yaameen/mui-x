@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode} from 'react';
 import { CalendarOrClockPickerView } from '../views';
 import type { PickerOnChangeFn } from '../../hooks/useViews';
 import type { ExportedCalendarPickerProps } from '../../../CalendarPicker/CalendarPicker';
@@ -10,16 +10,16 @@ export interface BaseToolbarProps<TDate, TValue>
     ExportedClockPickerProps<TDate>,
     Omit<PickerStatePickerProps<TValue>, 'onDateChange'> {
   ampmInClock?: boolean;
-  dateRangeIcon?: React.ReactNode;
+  dateRangeIcon?: ReactNode;
   getMobileKeyboardInputViewButtonText?: () => string;
   hideTabs?: boolean;
   isLandscape: boolean;
   onChange: PickerOnChangeFn<TDate>;
   openView: CalendarOrClockPickerView;
   setOpenView: (view: CalendarOrClockPickerView) => void;
-  timeIcon?: React.ReactNode;
+  timeIcon?: ReactNode;
   toolbarFormat?: string;
-  toolbarPlaceholder?: React.ReactNode;
-  toolbarTitle?: React.ReactNode;
+  toolbarPlaceholder?: ReactNode;
+  toolbarTitle?: ReactNode;
   views: readonly CalendarOrClockPickerView[];
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useRef, useReducer, useCallback} from 'react';
 import { SlideDirection } from './PickersSlideTransition';
 import { useIsDayDisabled } from '../internals/hooks/validation/useDateValidation';
 import { useUtils, useNow } from '../internals/hooks/useUtils';
@@ -111,7 +111,7 @@ export const useCalendarState = <TDate extends unknown>({
   const now = useNow<TDate>();
   const utils = useUtils<TDate>();
 
-  const reducerFn = React.useRef(
+  const reducerFn = useRef(
     createCalendarStateReducer<TDate>(
       Boolean(reduceAnimations),
       disableSwitchToMonthOnDayFocus,
@@ -119,14 +119,14 @@ export const useCalendarState = <TDate extends unknown>({
     ),
   ).current;
 
-  const [calendarState, dispatch] = React.useReducer(reducerFn, {
+  const [calendarState, dispatch] = useReducer(reducerFn, {
     isMonthSwitchingAnimating: false,
     focusedDay: date || now,
     currentMonth: utils.startOfMonth(date ?? defaultCalendarMonth ?? now),
     slideDirection: 'left',
   });
 
-  const handleChangeMonth = React.useCallback(
+  const handleChangeMonth = useCallback(
     (payload: ChangeMonthPayload<TDate>) => {
       dispatch({
         type: 'changeMonth',
@@ -140,7 +140,7 @@ export const useCalendarState = <TDate extends unknown>({
     [onMonthChange],
   );
 
-  const changeMonth = React.useCallback(
+  const changeMonth = useCallback(
     (newDate: TDate) => {
       const newDateRequested = newDate ?? now;
       if (utils.isSameMonth(newDateRequested, calendarState.currentMonth)) {
@@ -165,11 +165,11 @@ export const useCalendarState = <TDate extends unknown>({
     disablePast,
   });
 
-  const onMonthSwitchingAnimationEnd = React.useCallback(() => {
+  const onMonthSwitchingAnimationEnd = useCallback(() => {
     dispatch({ type: 'finishMonthSwitchingAnimation' });
   }, []);
 
-  const changeFocusedDay = React.useCallback(
+  const changeFocusedDay = useCallback(
     (newFocusedDate: TDate | null) => {
       if (!isDateDisabled(newFocusedDate)) {
         dispatch({ type: 'changeFocusedDay', focusedDay: newFocusedDate });

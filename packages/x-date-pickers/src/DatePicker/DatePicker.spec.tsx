@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import moment, { Moment } from 'moment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { expectType } from '@mui/types';
@@ -20,7 +20,7 @@ import { expectType } from '@mui/types';
 
 // Inference from the state
 const InferTest = () => {
-  const [date, setDate] = React.useState<Moment | null>(moment());
+  const [date, setDate] = useState<Moment | null>(moment());
 
   return (
     <DatePicker

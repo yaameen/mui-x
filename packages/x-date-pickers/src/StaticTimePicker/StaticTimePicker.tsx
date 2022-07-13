@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {RefAttributes, forwardRef, Ref, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   BaseTimePickerProps,
@@ -46,7 +46,7 @@ export type StaticTimePickerProps<TInputDate, TDate> = StaticPickerProps<
 };
 
 type StaticTimePickerComponent = (<TInputDate, TDate = TInputDate>(
-  props: StaticTimePickerProps<TInputDate, TDate> & React.RefAttributes<HTMLDivElement>,
+  props: StaticTimePickerProps<TInputDate, TDate> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element) & { propTypes?: any };
 
 /**
@@ -59,10 +59,10 @@ type StaticTimePickerComponent = (<TInputDate, TDate = TInputDate>(
  *
  * - [StaticTimePicker API](https://mui.com/x/api/date-pickers/static-time-picker/)
  */
-export const StaticTimePicker = React.forwardRef(function StaticTimePicker<
+export const StaticTimePicker = forwardRef(function StaticTimePicker<
   TInputDate,
   TDate = TInputDate,
->(inProps: StaticTimePickerProps<TInputDate, TDate>, ref: React.Ref<HTMLDivElement>) {
+>(inProps: StaticTimePickerProps<TInputDate, TDate>, ref: Ref<HTMLDivElement>) {
   const props = useTimePickerDefaultizedProps<
     TInputDate,
     TDate,
@@ -296,7 +296,7 @@ StaticTimePicker.propTypes = {
    * renderInput={props => <TextField {...props} />}
    * ````
    * @param {MuiTextFieldPropsType} props The props of the input.
-   * @returns {React.ReactNode} The node to render as the input.
+   * @returns {ReactNode} The node to render as the input.
    */
   renderInput: PropTypes.func.isRequired,
   /**

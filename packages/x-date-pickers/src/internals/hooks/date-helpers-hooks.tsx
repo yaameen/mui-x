@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useMemo, useCallback} from 'react';
 import { useUtils } from './useUtils';
 import { PickerOnChangeFn } from './useViews';
 import { getMeridiem, convertToMeridiem } from '../utils/time-utils';
@@ -15,7 +15,7 @@ export function useNextMonthDisabled<TDate>(
   { disableFuture, maxDate }: Pick<MonthValidationOptions<TDate>, 'disableFuture' | 'maxDate'>,
 ) {
   const utils = useUtils<TDate>();
-  return React.useMemo(() => {
+  return useMemo(() => {
     const now = utils.date()!;
     const lastEnabledMonth = utils.startOfMonth(
       disableFuture && utils.isBefore(now, maxDate) ? now : maxDate,
@@ -30,7 +30,7 @@ export function usePreviousMonthDisabled<TDate>(
 ) {
   const utils = useUtils<TDate>();
 
-  return React.useMemo(() => {
+  return useMemo(() => {
     const now = utils.date()!;
     const firstEnabledMonth = utils.startOfMonth(
       disablePast && utils.isAfter(now, minDate) ? now : minDate,
@@ -47,7 +47,7 @@ export function useMeridiemMode<TDate>(
   const utils = useUtils<TDate>();
   const meridiemMode = getMeridiem(date, utils);
 
-  const handleMeridiemChange = React.useCallback(
+  const handleMeridiemChange = useCallback(
     (mode: 'am' | 'pm') => {
       const timeWithMeridiem =
         date == null ? null : convertToMeridiem<TDate>(date, mode, Boolean(ampm), utils);

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {JSXElementConstructor, ReactNode} from 'react';
 import { useThemeProps } from '@mui/material/styles';
 import { useDefaultDates, useUtils } from '../internals/hooks/useUtils';
 import { CalendarPickerView, MuiPickersAdapter } from '../internals/models';
@@ -29,12 +29,12 @@ export interface BaseDatePickerProps<TInputDate, TDate>
    * Component that will replace default toolbar renderer.
    * @default DatePickerToolbar
    */
-  ToolbarComponent?: React.JSXElementConstructor<BaseToolbarProps<TDate, TDate | null>>;
+  ToolbarComponent?: JSXElementConstructor<BaseToolbarProps<TDate, TDate | null>>;
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
    * @default '–'
    */
-  toolbarPlaceholder?: React.ReactNode;
+  toolbarPlaceholder?: ReactNode;
   /**
    * Date format, that is displaying in toolbar.
    */
@@ -43,7 +43,7 @@ export interface BaseDatePickerProps<TInputDate, TDate>
    * Mobile picker title, displaying in the toolbar.
    * @default 'Select date'
    */
-  toolbarTitle?: React.ReactNode;
+  toolbarTitle?: ReactNode;
   /**
    * Array of views to show.
    */

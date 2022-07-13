@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, Ref, JSXElementConstructor, useRef} from 'react';
 import { useForkRef } from '@mui/material/utils';
 import { WrapperVariantContext } from './WrapperVariantContext';
 import {
@@ -13,7 +13,7 @@ import { PickerStateWrapperProps } from '../../hooks/usePickerState';
 import { DateInputSlotsComponent } from '../PureDateInput';
 
 export interface DesktopWrapperProps extends ExportedPickerPopperProps, ExportedPickerPaperProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export interface DesktopWrapperSlotsComponent
@@ -23,9 +23,9 @@ export interface DesktopWrapperSlotsComponent
 export interface DesktopWrapperSlotsComponentsProps extends PickersPopperSlotsComponentsProps {}
 
 export interface InternalDesktopWrapperProps extends DesktopWrapperProps, PickerStateWrapperProps {
-  DateInputProps: DateInputPropsLike & { ref?: React.Ref<HTMLDivElement> };
-  KeyboardDateInputComponent: React.JSXElementConstructor<
-    DateInputPropsLike & { ref?: React.Ref<HTMLDivElement> }
+  DateInputProps: DateInputPropsLike & { ref?: Ref<HTMLDivElement> };
+  KeyboardDateInputComponent: JSXElementConstructor<
+    DateInputPropsLike & { ref?: Ref<HTMLDivElement> }
   >;
   /**
    * Overrideable components.
@@ -56,7 +56,7 @@ export function DesktopWrapper(props: InternalDesktopWrapperProps) {
     components,
     componentsProps,
   } = props;
-  const ownInputRef = React.useRef<HTMLInputElement>(null);
+  const ownInputRef = useRef<HTMLInputElement>(null);
   const inputRef = useForkRef(DateInputProps.inputRef, ownInputRef);
 
   return (

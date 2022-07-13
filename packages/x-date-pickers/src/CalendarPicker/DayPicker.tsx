@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode, useCallback, useMemo, createRef, Fragment} from 'react';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { PickersDay, PickersDayProps } from '../PickersDay/PickersDay';
@@ -39,10 +39,10 @@ export interface ExportedDayPickerProps<TDate>
   ) => JSX.Element;
   /**
    * Component displaying when passed `loading` true.
-   * @returns {React.ReactNode} The node to render when loading.
+   * @returns {ReactNode} The node to render when loading.
    * @default () => "..."
    */
-  renderLoading?: () => React.ReactNode;
+  renderLoading?: () => ReactNode;
 }
 
 export interface DayPickerProps<TDate> extends ExportedDayPickerProps<TDate> {
@@ -141,7 +141,7 @@ export function DayPicker<TDate>(props: DayPickerProps<TDate>) {
     disableFuture,
   });
 
-  const handleDaySelect = React.useCallback(
+  const handleDaySelect = useCallback(
     (day: TDate, isFinish: PickerSelectionState = 'finish') => {
       if (readOnly) {
         return;
@@ -160,10 +160,10 @@ export function DayPicker<TDate>(props: DayPickerProps<TDate>) {
   // need a new ref whenever the `key` of the transition changes: http://reactcommunity.org/react-transition-group/transition/#Transition-prop-nodeRef.
   const transitionKey = currentMonthNumber;
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const slideNodeRef = React.useMemo(() => React.createRef<HTMLDivElement>(), [transitionKey]);
+  const slideNodeRef = useMemo(() => createRef<HTMLDivElement>(), [transitionKey]);
 
   return (
-    <React.Fragment>
+    <Fragment>
       <PickersCalendarDayHeader>
         {utils.getWeekdays().map((day, i) => (
           <PickersCalendarWeekDayLabel aria-hidden key={day + i.toString()} variant="caption">
@@ -222,6 +222,6 @@ export function DayPicker<TDate>(props: DayPickerProps<TDate>) {
           </PickersCalendarWeekContainer>
         </PickersCalendarSlideTransition>
       )}
-    </React.Fragment>
+    </Fragment>
   );
 }

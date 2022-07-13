@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState, Fragment, forwardRef, ReactNode, Ref, useEffect} from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import TextField from '@mui/material/TextField';
@@ -83,10 +83,10 @@ describe('<DesktopDatePicker />', () => {
 
   it('should allow to switch from invalid date to null date in the input', () => {
     const Test = () => {
-      const [value, setValue] = React.useState(null);
+      const [value, setValue] = useState(null);
 
       return (
-        <React.Fragment>
+        <Fragment>
           <DesktopDatePicker
             value={value}
             onChange={(newValue) => setValue(newValue)}
@@ -98,7 +98,7 @@ describe('<DesktopDatePicker />', () => {
           <button data-mui-test="reset" onClick={() => setValue(null)}>
             Clear
           </button>
-        </React.Fragment>
+        </Fragment>
       );
     };
 
@@ -208,9 +208,9 @@ describe('<DesktopDatePicker />', () => {
   });
 
   describe('scroll', () => {
-    const NoTransition = React.forwardRef(function NoTransition(
-      props: TransitionProps & { children?: React.ReactNode },
-      ref: React.Ref<HTMLDivElement>,
+    const NoTransition = forwardRef(function NoTransition(
+      props: TransitionProps & { children?: ReactNode },
+      ref: Ref<HTMLDivElement>,
     ) {
       const { children, in: inProp } = props;
 
@@ -245,16 +245,16 @@ describe('<DesktopDatePicker />', () => {
       const handleClose = spy();
       const handleOpen = spy();
       function BottomAnchoredDesktopTimePicker() {
-        const [anchorEl, anchorElRef] = React.useState<HTMLElement | null>(null);
+        const [anchorEl, anchorElRef] = useState<HTMLElement | null>(null);
 
-        React.useEffect(() => {
+        useEffect(() => {
           if (anchorEl !== null) {
             window.scrollTo(0, anchorEl.getBoundingClientRect().top);
           }
         }, [anchorEl]);
 
         return (
-          <React.Fragment>
+          <Fragment>
             <div style={{ height: '200vh' }}>Spacer</div>
             <DesktopDatePicker
               value={adapterToUse.date(new Date(2018, 0, 1))}
@@ -265,7 +265,7 @@ describe('<DesktopDatePicker />', () => {
               renderInput={(params) => <TextField {...params} />}
               TransitionComponent={NoTransition}
             />
-          </React.Fragment>
+          </Fragment>
         );
       }
       render(<BottomAnchoredDesktopTimePicker />);

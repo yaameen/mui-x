@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactElement, Key} from 'react';
 import clsx from 'clsx';
 import Fade from '@mui/material/Fade';
 import { styled } from '@mui/material/styles';
@@ -6,10 +6,10 @@ import { generateUtilityClasses } from '@mui/material';
 import { TransitionGroup } from 'react-transition-group';
 
 interface FadeTransitionProps {
-  children: React.ReactElement;
+  children: ReactElement;
   className?: string;
   reduceAnimations: boolean;
-  transKey: React.Key;
+  transKey: Key;
 }
 
 const classes = generateUtilityClasses('PrivatePickersFadeTransitionGroup', ['root']);
