@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import { AutoSizer, Grid } from 'react-virtualized';
 

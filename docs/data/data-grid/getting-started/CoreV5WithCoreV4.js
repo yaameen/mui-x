@@ -1,4 +1,3 @@
-import * as React from 'react';
 
 export default function CoreV5WithCoreV4() {
   return (

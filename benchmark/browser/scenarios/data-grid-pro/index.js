@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import { DataGridPro as MuiDataGridPro } from '@mui/x-data-grid-pro';
 
